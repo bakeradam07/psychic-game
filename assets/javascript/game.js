@@ -18,4 +18,29 @@ var guessesLeft = function() {
     document.getElementById("left").innerHTML = "Guesses Left: " + left;
 };
 
+var startOver = function() {
+    guessedLetters = [];
+    left = 9;
+    newLetter();
+    guessesLeft();
+    whatsBeenGuessed();
+};
 
+document.onkeyup = function(event){
+    var userGuess = event.key;
+    left--;
+    guessesSoFar.push(userGuess);
+    whatsBeenGuessed();
+    guessesLeft();
+    if (left > 0) {
+        if (userGuess == psychicGuess) {
+            wins++;
+            getElementById("wins").innerHTML = "Wins: " + wins;
+            startOver();
+        }
+    } else if (left == 0) {
+        losses++;
+        document.getElementById("losses").innerHTML = "Losses: " + losses;
+        startOver();
+    }
+};
